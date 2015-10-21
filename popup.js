@@ -88,6 +88,28 @@ function getImageUrl(searchTerm, callback, errorCallback) {
   x.send();
 }
 
+function readTextFile()
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", "test.txt", false);
+    rawFile.onload = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status === 0)
+            {
+                var allText = rawFile.responseText;
+                console.log(allText);
+                //callback(allText);
+                //alert(allText);
+            }
+        }
+    };
+    rawFile.send(null);
+}
+
+readTextFile();
+
 function validateForm() {
     var x = document.forms["chose"]["site"].value;
     if (x === null || x === "") {
