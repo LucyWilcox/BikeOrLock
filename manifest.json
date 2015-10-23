@@ -13,10 +13,12 @@
     "matches":[
       "https://www.facebook.com/*"
     ],
+    "js":["https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", "script.js"],
     "js": ["content.js"]
   }],
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "https://ajax.googleapis.com/",
+    "https://peaceful-reef-6842.herokuapp.com/bikeSession/getjson*"
   ]
 }
