@@ -89,32 +89,25 @@
 // }
 
 function getData(callback){
-    $.ajax({
-        url: 'https://peaceful-reef-6842.herokuapp.com/bikeSession',
-        dataType: 'json',
-        success: function(json) {
-            console.log(json);
-            distance = json.distance;
-            console.log(rates);
-            callback(distance);
-        }
-    });
+  var url = "https://peaceful-reef-6842.herokuapp.com/bikeSession?&format=json&jsoncallback=?";
+  var Httpreq = new XMLHttpRequest(); // a new request
+  Httpreq.open("GET",url,false);
+    Httpreq.onload = function()
+    {
+      var response = Httpreq.responseText;
+      //console.log(response);
+      callback(response);
+    };
+  Httpreq.send(null);
+
+  //$.getJSON("https://peaceful-reef-6842.herokuapp.com/bikeSession?&format=json&jsoncallback=?", function(data) {
+  //console.log(data);
+//});
 }
 
-getData();
-
-// function getData2(callback){
-//   var peaceful = "https://peaceful-reef-6842.herokuapp.com/bikeSession";
-//   $.getJson(peaceful, function(data) {
-//     var items = [];
-//     $.each(data, function)
-//   }
-    
-//   })
-// }
-
-
-
+getData(function(response){
+  console.log(response);
+});
 
 
 function readTextFile(callback){
@@ -137,9 +130,9 @@ function readTextFile(callback){
     rawFile.send(null);
 }
 
-readTextFile(function(allText){
-  console.log(allText);
-});
+// readTextFile(function(allText){
+//   console.log(allText);
+// });
 
 function validateForm() {
     var x = document.forms["chose"]["site"].value;
