@@ -1,17 +1,19 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
+  "name": "BikeNChill",
+  "description": "Bike BIKE Bike",
   "version": "1.0",
-
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "rsz_bike.png",
     "default_popup": "popup.html"
+  },
+  "background": { 
+   "page":"bg.html"
   },
   "content_scripts": [{
     "matches":[
-      "https://www.facebook.com/*"
+      "http://www.netflix.com/*"
     ],
     "js":["https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", "script.js"],
     "js": ["content.js"]
