@@ -1,6 +1,6 @@
 var bikenchill = "http://bikenchill.weebly.com/";
 var lastDistance = 0;
-var minDistance = 2;
+var minDistance = 4; // should be user chosen at some pont
 
 function getData(callback){ //hits webapp gets all json that is there
   var url = "https://peaceful-reef-6842.herokuapp.com/bikeSession?&format=json&jsoncallback=?";
@@ -21,8 +21,7 @@ getData(function(response){ // actually call getData
 function checkDistance(response){
   var last = response.length - 1;
   var lastResponse = response[last];
-  lastDistance = lastResponse.distance;
-  console.log(lastDistance);
+  lastDistance = lastResponse.distance; // gets the distance of the last object of the json
 }
 
 if (lastDistance < minDistance){

@@ -1,14 +1,19 @@
+var chosenDistance = 0;
+
 function validateForm() {
-    var x = document.forms["chose"]["site"].value;
-    if (x === null || x === "") {
-        alert("Name must be filled out");
+    var distanceString = document.forms["chose"]["distance"].value;
+    var distance = parseInt(distanceString);
+    //console.log(typeof distance);
+    if (isNaN(distance) === true) {
+        alert("Distance must be filled out");
         return false;
     }
     else {
-      console.log(x);
+      //chosenDistance = distance;
+      localStorage.chosenDistance = distance;
+      //console.log(chosenDistance);
     }
 }
-
 function renderStatus(statusText) {
   document.getElementById('status').textContent = statusText;
 }

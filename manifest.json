@@ -11,12 +11,13 @@
   "background": { 
    "page":"bg.html"
   },
+  "options_page": "options.html",
   "content_scripts": [{
     "matches":[
       "http://www.netflix.com/*"
     ],
     "js":["https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", "script.js"],
-    "js": ["content.js"]
+    "js": ["content.js", "popup.js"]
   }],
   "permissions": [
     "activeTab",
