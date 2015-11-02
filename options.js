@@ -1,4 +1,5 @@
 var chosenDistance = 0;
+var port = chrome.runtime.connect({name:"options"});
 //document.getElementById('distance').defaultValue = chosenDistance.toString();
 
 function validateForm() {
@@ -11,8 +12,11 @@ function validateForm() {
     }
     else {
       //chosenDistance = distance;
-      localStorage.chosenDistance = distance;
-      console.log(distance);
+      //localStorage["ChosenDistance"] = distance;
+      //alert(localStorage["ChosenDistance"]);
+      chrome.runtime.onConnect.addListener(function(port){
+        port.postMessage({chosenDistance:distance});
+      });
     }
 }
 function renderStatus(statusText) {
