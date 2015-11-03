@@ -12,8 +12,8 @@ function validateForm() {
     }
     else {
       //chosenDistance = distance;
-      //localStorage["ChosenDistance"] = distance;
-      //alert(localStorage["ChosenDistance"]);
+      // localStorage.setItem("ChosenDistance", distance); // = distance;
+      // alert(localStorage.getItem("ChosenDistance"));
       chrome.runtime.onConnect.addListener(function(port){
         port.postMessage({chosenDistance:distance});
       });

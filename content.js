@@ -1,7 +1,11 @@
 var bikenchill = "http://bikenchill.weebly.com/";
 var lastDistance = 0;
-var minDistance = 0; // should be user chosen at some pont
-var port = chrome.runtime.connect({name:"mycontentscript"});
+//var minDistance = 0; // should be user chosen at some pont
+var port = chrome.runtime.connect({name:"content"});
+//localStorage.setItem("minDistance", 0);
+// alert(localStorage.getItem("bla"));
+// minDistance = localStorage.getItem("ChosenDistance");
+// alert(minDistance);
 
 function getData(callback){ //hits webapp gets all json that is there
   var url = "https://peaceful-reef-6842.herokuapp.com/bikeSession?&format=json&jsoncallback=?";
@@ -20,16 +24,40 @@ getData(function(response){ // actually call getData
 });
 
 
-port.onMessage.addListener(function(message,sender){
-  minDistance = message.chosenDistance;
+function getSettings(callback){
+  port.onMessage.addListener(function(message,sender){
+    var setDistance = message.chosenDistance;
+    var response = setDistance;
+    minDistance = response;
+    callback(response);
+    //reDirect(minDistance); 
+  });
+}
+
+getSettings(function(response){
+  minDistance = response;
+  if (response !== null){
+    localStorage.setItem("minDistance", minDistance);
+  }
+  //reDirect();
 });
+
+
+//alert(minDistance);
+// alert(newMinDistance);
 
 function checkDistance(response){
   var last = response.length - 1;
   var lastResponse = response[last];
-  lastDistance = lastResponse.distance; // gets the distance of the last object of the json
+  lastDistance = lastResponse.rotations; // gets the distance of the last object of the json
 }
 
-if (lastDistance < minDistance){
-  chrome.extension.sendRequest({redirect: bikenchill}); // send message to redirect  
+reDirect();
+
+function reDirect(){
+  minDistance = localStorage.getItem("minDistance");
+  alert(minDistance);
+  if (lastDistance < minDistance){
+    chrome.extension.sendRequest({redirect: bikenchill}); // send message to redirect  
+  }
 }
