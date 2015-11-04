@@ -17,7 +17,7 @@
       "http://www.netflix.com/*"
     ],
     "js":["https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", "script.js"],
-    "js": ["content.js", "popup.js", "options.js"]
+    "js": ["options.js", "popup.js", "content.js"]
   }],
   "permissions": [
     "activeTab",
