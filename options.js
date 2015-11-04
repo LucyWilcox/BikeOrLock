@@ -1,26 +1,18 @@
 var chosenDistance = 0;
-var port = chrome.runtime.connect({name:"options"});
-//document.getElementById('distance').defaultValue = chosenDistance.toString();
+var port = chrome.runtime.connect({name:"options"}); //open of a port
 
 function validateForm() {
     var distanceString = document.getElementById("distance").value;
-    var distance = parseInt(distanceString);
-    //console.log(typeof distance);
-    if (isNaN(distance) === true) {
+    var distance = parseInt(distanceString); // this parseInt does have limitations...
+    if (isNaN(distance) === true) { // check if number was entered
         alert("Distance must be filled out");
         return false;
     }
     else {
-      //chosenDistance = distance;
-      // localStorage.setItem("ChosenDistance", distance); // = distance;
-      // alert(localStorage.getItem("ChosenDistance"));
       chrome.runtime.onConnect.addListener(function(port){
-        port.postMessage({chosenDistance:distance});
+        port.postMessage({chosenDistance:distance}); //send message into port as chosenDistance, used in content.js
       });
     }
-}
-function renderStatus(statusText) {
-  document.getElementById('status').textContent = statusText;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
