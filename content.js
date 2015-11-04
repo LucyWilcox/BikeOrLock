@@ -18,6 +18,12 @@ getData(function(response){ // actually call getData
   checkDistance(response); // and moves on to get the last entry
 });
 
+function checkDistance(response){
+  var last = response.length - 1;
+  var lastResponse = response[last];
+  lastDistance = lastResponse.rotations; // gets the distance of the last object of the json
+}
+
 function getSettings(callback){
   port.onMessage.addListener(function(message,sender){
     var setDistance = message.chosenDistance;
@@ -32,12 +38,6 @@ getSettings(function(response){
     localStorage.setItem("minDistance", minDistance); // store it locally so it is 'saved' by the user
   }
 });
-
-function checkDistance(response){
-  var last = response.length - 1;
-  var lastResponse = response[last];
-  lastDistance = lastResponse.rotations; // gets the distance of the last object of the json
-}
 
 function reDirect(){
   minDistance = localStorage.getItem("minDistance");
