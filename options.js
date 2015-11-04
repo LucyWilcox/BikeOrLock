@@ -17,5 +17,6 @@ function validateForm() {
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("setDistance").addEventListener("click", validateForm);
+    reDirect();
 });
 
