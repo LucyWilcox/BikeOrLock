@@ -1,11 +1,6 @@
 var bikenchill = "http://bikenchill.weebly.com/";
 var lastDistance = 0;
-//var minDistance = 0; // should be user chosen at some pont
-var port = chrome.runtime.connect({name:"content"});
-//localStorage.setItem("minDistance", 0);
-// alert(localStorage.getItem("bla"));
-// minDistance = localStorage.getItem("ChosenDistance");
-// alert(minDistance);
+var port = chrome.runtime.connect({name:"content"}); // magic to me, opens a port to get stuff sets in options
 
 function getData(callback){ //hits webapp gets all json that is there
   var url = "https://peaceful-reef-6842.herokuapp.com/bikeSession?&format=json&jsoncallback=?";
@@ -23,28 +18,20 @@ getData(function(response){ // actually call getData
   checkDistance(response); // and moves on to get the last entry
 });
 
-
 function getSettings(callback){
   port.onMessage.addListener(function(message,sender){
     var setDistance = message.chosenDistance;
     var response = setDistance;
-    minDistance = response;
-    callback(response);
-    //reDirect(minDistance); 
+    callback(response); //respones is the chosenDistance set in options recived through the port
   });
 }
 
-getSettings(function(response){
+getSettings(function(response){ 
   minDistance = response;
-  if (response !== null){
-    localStorage.setItem("minDistance", minDistance);
+  if (response !== null){ // check to see if a distance is set
+    localStorage.setItem("minDistance", minDistance); // store it locally so it is 'saved' by the user
   }
-  //reDirect();
 });
-
-
-//alert(minDistance);
-// alert(newMinDistance);
 
 function checkDistance(response){
   var last = response.length - 1;
@@ -52,12 +39,12 @@ function checkDistance(response){
   lastDistance = lastResponse.rotations; // gets the distance of the last object of the json
 }
 
-reDirect();
-
 function reDirect(){
   minDistance = localStorage.getItem("minDistance");
-  alert(minDistance);
+  //alert(minDistance);
   if (lastDistance < minDistance){
     chrome.extension.sendRequest({redirect: bikenchill}); // send message to redirect  
   }
 }
+
+reDirect();
