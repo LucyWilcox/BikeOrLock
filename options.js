@@ -1,7 +1,7 @@
 var chosenDistance = 0;
 var port = chrome.runtime.connect({name:"options"}); //open of a port
 
-function validateForm() {
+function validateDistance() {
     var distanceString = document.getElementById("distance").value;
     var distance = parseInt(distanceString); // this parseInt does have limitations...
     if (isNaN(distance) === true) { // check if number was entered
@@ -16,6 +16,14 @@ function validateForm() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("setDistance").addEventListener("click", validateForm);
+    document.getElementById("setDistance").addEventListener("click", validateDistance);
 });
 
+
+function addSite() {
+    var newSite = document.getElementById("distance").value;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("addSite").addEventListener("click", validateForm);
+});

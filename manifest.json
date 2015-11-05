@@ -14,10 +14,10 @@
   "options_page": "options.html",
   "content_scripts": [{
     "matches":[
-      "http://www.netflix.com/*"
+      "<all_urls>"
     ],
     "js":["https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", "script.js"],
-    "js": ["options.js", "content.js"]
+    "js": ["content.js"]
   }],
   "permissions": [
     "activeTab",
