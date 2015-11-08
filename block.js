@@ -41,7 +41,6 @@ getSettings(function(response){
 
 function reDirect(){
   minDistance = localStorage.getItem("minDistance");
-  //alert(minDistance);
   if (lastDistance < minDistance){
     chrome.extension.sendRequest({redirect: bikenchill}); // send message to redirect  
   }

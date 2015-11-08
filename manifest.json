@@ -16,8 +16,8 @@
     "matches":[
       "<all_urls>"
     ],
-    "js":["https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", "script.js", "url-pattern.js"],
-    "js": ["options.js","block.js"]
+    "js":["https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", "script.js"],
+    "js": ["urlpattern.js","options.js","block.js"]
   }],
   "permissions": [
     "activeTab",
