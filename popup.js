@@ -10,6 +10,18 @@ function getData(callback){ //hits webapp gets all json that is there
   Httpreq.send(null);
 }
 
+function goalInfo(callback) {
+    console.log("hello");
+    console.log(items);
+}
+
+function getLocalGoals() {
+    console.log(chrome.storage.local);
+    chrome.storage.local.get('minDistance', function(data) {
+        console.log(data);
+    });
+}
+
 function showDistance(response){
   var distances = response;
   dist = 0;
@@ -26,5 +38,6 @@ function renderStatus(statusText) {
 
 getData(function(response){ // actually call getData
   showDistance(response); // and moves on to get the last entry
+  getLocalGoals();
 });
 
