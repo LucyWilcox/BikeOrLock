@@ -57,9 +57,10 @@ getSettings(function(response){
 function reDirect(){
   minDistance = localStorage.getItem("minDistance");
   var webPattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(/*)');
-  
+  var hehe = chrome.tabs.url;
+  alert(hehe);
   if (lastDistance < minDistance){
-    alert("redirecting");
+    //alert("redirecting");
     chrome.extension.sendRequest({redirect: bikenchill}); // send message to redirect  
   }
 }
