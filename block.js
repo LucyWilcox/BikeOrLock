@@ -39,9 +39,27 @@ getSettings(function(response){
   }
 });
 
+// function getPattern(callback){
+//   port.onMessage.addListener(function(message,sender){
+//     var pattern = message.pattern;
+//     callback(response);
+//   });
+// }
+
+// getPattern(function(response){ 
+//   pattern = response;
+//   alert(pattern);
+//   if (response !== null){ // check to see if a distance is set
+//     localStorage.setItem("pattern", pattern); // store it locally so it is 'saved' by the user
+//   }
+// });
+
 function reDirect(){
   minDistance = localStorage.getItem("minDistance");
+  var webPattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(/*)');
+  
   if (lastDistance < minDistance){
+    alert("redirecting");
     chrome.extension.sendRequest({redirect: bikenchill}); // send message to redirect  
   }
 }
