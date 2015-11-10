@@ -33,48 +33,48 @@ function getBlockedSites(){
 }
 
 
-var SM = (function () {
+// var SM = (function () {
 
-    var my = {};
+//     var my = {};
 
-    my.get = function (key) {
-        return localStorage.getItem(key);
-    };
-
-
-    return my;
-
-}());
-
-var GB = (function (SM) {
-    var my = {};
-
-    my.blockTheseSites = {
-        "gawker.com"        : "Gawker Media",
-        "io9.com"           : "SciFi Blog",
-        "gizmodo.com"       : "Gadget Blog",
-    };
-
-    if (!SM.get("blocklist")) {
-        SM.put("blocklist", JSON.stringify(my.blockTheseSites));
-    }
-
-    my.getBlockedSites = function () {
-        return JSON.parse(SM.get("blocklist"));
-    };
+//     my.get = function (key) {
+//         return localStorage.getItem(key);
+//     };
 
 
-    my.addBlockedSite = function (site) {
-        my.blockedSites = JSON.parse(SM.get("blocklist"));
-        my.blockedSites[site] = "Custom Add";
-        SM.put("blocklist", JSON.stringify(my.blockedSites));
-    };
+//     return my;
 
-    my.removeBlockedSite = function (site) {
-        my.blockedSites = JSON.parse(SM.get("blocklist"));
-        delete my.blockedSites[site];
-        SM.put("blocklist", JSON.stringify(my.blockedSites));
-    };
+// }());
 
-    return my;
-}(SM));
+// var GB = (function (SM) {
+//     var my = {};
+
+//     my.blockTheseSites = {
+//         "gawker.com"        : "Gawker Media",
+//         "io9.com"           : "SciFi Blog",
+//         "gizmodo.com"       : "Gadget Blog",
+//     };
+
+//     if (!SM.get("blocklist")) {
+//         SM.put("blocklist", JSON.stringify(my.blockTheseSites));
+//     }
+
+//     my.getBlockedSites = function () {
+//         return JSON.parse(SM.get("blocklist"));
+//     };
+
+
+//     my.addBlockedSite = function (site) {
+//         my.blockedSites = JSON.parse(SM.get("blocklist"));
+//         my.blockedSites[site] = "Custom Add";
+//         SM.put("blocklist", JSON.stringify(my.blockedSites));
+//     };
+
+//     my.removeBlockedSite = function (site) {
+//         my.blockedSites = JSON.parse(SM.get("blocklist"));
+//         delete my.blockedSites[site];
+//         SM.put("blocklist", JSON.stringify(my.blockedSites));
+//     };
+
+//     return my;
+// }(SM));
