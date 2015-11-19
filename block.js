@@ -2,21 +2,32 @@ var bikenchill = "http://bikenchill.weebly.com/";
 var lastDistance = 0;
 var port = chrome.runtime.connect({name:"block"}); // magic to me, opens a port to get stuff sets in options
 chrome.extension.sendRequest({redirect: bikenchill});
-// function getData(callback){ //hits webapp gets all json that is there
-//   var url = "https://peaceful-reef-6842.herokuapp.com/bikeSession?&format=json&jsoncallback=?";
-//   var Httpreq = new XMLHttpRequest(); // a new request
-//   Httpreq.open("GET",url,false);
-//     Httpreq.onload = function()
-//     {
-//       var response = JSON.parse(Httpreq.responseText);
-//       callback(response);
-//     };
-//   Httpreq.send(null);
-// }
 
-// getData(function(response){ // actually call getData
-//   checkDistance(response); // and moves on to get the last entry
-// });
+
+function checkBlocking(domain){
+  var json = localStorage.getItem("blockedSites");
+  console.log(json);
+}
+
+function getData(callback){ //hits webapp gets all json that is there
+  var url = "https://bikechill.herokuapp.com/userStats?&format=json&jsoncallback=?";
+  var Httpreq = new XMLHttpRequest(); // a new request
+  Httpreq.open("GET",url,false);
+    Httpreq.onload = function()
+    {
+      var response = JSON.parse(Httpreq.responseText);
+      //console.log(response);
+      callback(response);
+    };
+  Httpreq.send(null);
+}
+
+getData(function(response){ // response is json object
+  console.log(response); //
+  var user = response.users.blockedDomains;
+  //console.log(user);
+  localStorage.setItem("blockedSites" , response);
+});
 
 // function checkDistance(response){
 //   var last = response.length - 1;
@@ -30,13 +41,12 @@ function checkURL(url){
   var site = webPattern.match(url);
   var domain = site.domain;
   console.log(domain);
+  checkBlocking(domain);
 }
 
 function getURL(){
   port.onMessage.addListener(function(message,sender){
     var url = message.url;
-    //localStorage.setItem("url", url); // store it locally so it is 'saved' by the user
-    console.log(url);
     checkURL(url);
   });
 }
