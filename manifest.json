@@ -17,7 +17,7 @@
       "<all_urls>"
     ],
     "js":["https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js", "script.js"],
-    "js": ["urlpattern.js","options.js","block.js","redirect.js"]
+    "js": ["urlpattern.js","redirect.js","block.js"]
   }],
   "permissions": [
     "activeTab",
