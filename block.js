@@ -1,12 +1,20 @@
-var bikenchill = "http://bikenchill.weebly.com/";
-var lastDistance = 0;
+var bikenchill = "http://bikechill.herokuapp.com/dashboard";
 var port = chrome.runtime.connect({name:"block"}); // magic to me, opens a port to get stuff sets in options
 chrome.extension.sendRequest({redirect: bikenchill});
 
 
+
 function checkBlocking(domain){
-  var json = localStorage.getItem("blockedSites");
-  console.log(json);
+  var blockedSites = localStorage.getItem("blockedSites");
+  var blockedList = blockedSites.split(',');
+  if (blockedList.indexOf(domain) > -1){
+    chrome.runtime.onConnect.addListener(function(port){
+      port.postMessage({"blocking" : true}); //send message into port as chosenDistance, used in content.js
+    });
+    console.log("blocking");
+    //chrome.tabs.update(sender.tab.id, {url: request.redirect});
+    //chrome.extension.sendRequest({redirect2: bikenchill});
+  }
 }
 
 function getData(callback){ //hits webapp gets all json that is there
@@ -16,17 +24,14 @@ function getData(callback){ //hits webapp gets all json that is there
     Httpreq.onload = function()
     {
       var response = JSON.parse(Httpreq.responseText);
-      //console.log(response);
       callback(response);
     };
   Httpreq.send(null);
 }
 
 getData(function(response){ // response is json object
-  console.log(response); //
-  var user = response.users.blockedDomains;
-  //console.log(user);
-  localStorage.setItem("blockedSites" , response);
+  var blockedSites = response.users.blockedDomains;
+  localStorage.setItem("blockedSites" , blockedSites);
 });
 
 // function checkDistance(response){
@@ -40,7 +45,6 @@ function checkURL(url){
   var webPattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(/*)');
   var site = webPattern.match(url);
   var domain = site.domain;
-  console.log(domain);
   checkBlocking(domain);
 }
 

@@ -17,8 +17,14 @@ chrome.extension.onRequest.addListener(function(request, sender) {
   chrome.runtime.onConnect.addListener(function(port){
     port.postMessage({"url" : textUrl}); //send message into port as chosenDistance, used in content.js
   });
+  
+  // port.onMessage.addListener(function(message,sender){
+  //   var blocking = message.blocking;
+  //   alert(blocking);
+  // });
+
   // if (domain === "netflix"){
-    //chrome.tabs.update(sender.tab.id, {url: request.redirect});
+   // chrome.tabs.update(sender.tab.id, {url: request.redirect});
  // }
       // for (var site in GB.getBlockedSites()) {
       //   if (domain === "netflix") {
@@ -26,3 +32,19 @@ chrome.extension.onRequest.addListener(function(request, sender) {
       //   }
     //}
 });
+
+// var url, tab;
+// function init(){
+//     chrome.tabs.query({currentWindow: true, active: true},function(tabs){
+//       url = tabs[0].url;
+//       tab = tabs[0];
+//       //Now that we have the data we can proceed and do something with it
+//       processTab();
+//     });
+// }
+
+// function processTab(){
+//     // Use url & tab as you like
+//     console.log(url);
+//     console.log(tab);
+// }

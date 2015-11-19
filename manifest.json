@@ -22,7 +22,6 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "https://ajax.googleapis.com/",
-    "https://peaceful-reef-6842.herokuapp.com/bikeSession/getjson*"
+    "https://ajax.googleapis.com/"
   ]
 }
