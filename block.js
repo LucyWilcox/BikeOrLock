@@ -2,18 +2,29 @@ var bikenchill = "http://bikechill.herokuapp.com/dashboard";
 var port = chrome.runtime.connect({name:"block"}); // magic to me, opens a port to get stuff sets in options
 chrome.extension.sendRequest({redirect: bikenchill});
 
-
+function block(bool){
+  if (bool === true){
+    chrome.extension.sendRequest({redirect2: bikenchill});
+  }
+  else{
+    chrome.extension.sendRequest({redirect: bikenchill});
+  }
+}
 
 function checkBlocking(domain){
   var blockedSites = localStorage.getItem("blockedSites");
   var blockedList = blockedSites.split(',');
   if (blockedList.indexOf(domain) > -1){
-    chrome.runtime.onConnect.addListener(function(port){
-      port.postMessage({"blocking" : true}); //send message into port as chosenDistance, used in content.js
-    });
-    console.log("blocking");
+    // chrome.runtime.onConnect.addListener(function(port){
+    //   port.postMessage({"blocking" : true}); //send message into port as chosenDistance, used in content.js
+    // });
+    console.log(domain);
+    block(true);
     //chrome.tabs.update(sender.tab.id, {url: request.redirect});
-    //chrome.extension.sendRequest({redirect2: bikenchill});
+  }
+  else{
+    console.log(domain);
+    //block(false);
   }
 }
 
@@ -45,17 +56,23 @@ function checkURL(url){
   var webPattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(/*)');
   var site = webPattern.match(url);
   var domain = site.domain;
+  console.log(domain);
   checkBlocking(domain);
 }
 
 function getURL(){
   port.onMessage.addListener(function(message,sender){
-    var url = message.url;
-    checkURL(url);
+    url = message.url;
+    localStorage.setItem("url", url);
   });
+  var url = localStorage.getItem("url");
+  checkURL(url);
+  console.log(url);
 }
 
 getURL();
+
+
 
 
 //function reDirect(){
