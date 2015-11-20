@@ -19,6 +19,7 @@
     "js": ["urlpattern.js","block.js"]
   }],
   "permissions": [
+    "storage",
     "activeTab",
     "tabs",
     "https://ajax.googleapis.com/"
