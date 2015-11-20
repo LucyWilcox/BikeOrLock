@@ -1,30 +1,13 @@
 var bikenchill = "http://bikechill.herokuapp.com/dashboard";
 var port = chrome.runtime.connect({name:"block"}); // magic to me, opens a port to get stuff sets in options
-chrome.extension.sendRequest({redirect: bikenchill});
-
-function block(bool){
-  if (bool === true){
-    chrome.extension.sendRequest({redirect2: bikenchill});
-  }
-  else{
-    chrome.extension.sendRequest({redirect: bikenchill});
-  }
-}
+// chrome.extension.sendRequest({redirect: bikenchill});
 
 function checkBlocking(domain){
   var blockedSites = localStorage.getItem("blockedSites");
   var blockedList = blockedSites.split(',');
   if (blockedList.indexOf(domain) > -1){
-    // chrome.runtime.onConnect.addListener(function(port){
-    //   port.postMessage({"blocking" : true}); //send message into port as chosenDistance, used in content.js
-    // });
-    console.log(domain);
-    block(true);
-    //chrome.tabs.update(sender.tab.id, {url: request.redirect});
-  }
-  else{
-    console.log(domain);
-    //block(false);
+    console.log("in");
+    chrome.extension.sendRequest({end: bikenchill});
   }
 }
 
@@ -45,13 +28,6 @@ getData(function(response){ // response is json object
   localStorage.setItem("blockedSites" , blockedSites);
 });
 
-// function checkDistance(response){
-//   var last = response.length - 1;
-//   var lastResponse = response[last];
-//   lastDistance = lastResponse.rotations; // gets the distance of the last object of the json
-// }
-
-
 function checkURL(url){
   var webPattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(/*)');
   var site = webPattern.match(url);
@@ -67,11 +43,20 @@ function getURL(){
   });
   var url = localStorage.getItem("url");
   checkURL(url);
-  console.log(url);
 }
 
 getURL();
 
+// function check(callback){
+//   chrome.extension.sendRequest({redirect: bikenchill});
+//   port.onMessage.addListener(function(message,sender){
+//     callback(message); //respones is the chosenDistance set in options recived through the port
+//   });
+// }
+
+// check(function(response){ 
+//   getURL();
+// });
 
 
 

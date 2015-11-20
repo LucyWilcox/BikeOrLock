@@ -1,7 +1,7 @@
-var port = chrome.runtime.connect({name:"redirect2"});
+var port = chrome.runtime.connect({name:"end"});
 
 chrome.extension.onRequest.addListener(function(request, sender) {
-  chrome.tabs.update(sender.tab.id, {url: request.redirect2});
+  chrome.tabs.update(sender.tab.id, {url: request.end});
   var tabUrl = sender.tab.url;
   var textUrl = tabUrl.toString();
   //alert(textUrl);
