@@ -25,7 +25,7 @@ function getLocalGoals() {
 function showDistance(response){
   var distances = response;
   dist = 0;
-  for (d in distances) {
+  for (var d in distances) {
     rotations = response[d]["rotations"];
     dist += rotations;
   }

@@ -438,9 +438,9 @@ var slice = [].slice;
   return UrlPattern;
 });
 
-var webPattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(/*)');
+// var webPattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(/*)');
 
- chrome.runtime.onConnect.addListener(function(port){
-        port.postMessage({pattern: webPattern}); //send message into port as chosenDistance, used in content.js
-      });
-//alert(pattern);
+// chrome.runtime.onConnect.addListener(function(port){
+//         port.postMessage({pattern: webPattern}); //send message into port as chosenDistance, used in content.js
+//       });
+//alert(webPattern);
