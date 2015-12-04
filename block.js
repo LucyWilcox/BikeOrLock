@@ -4,7 +4,9 @@ var port = chrome.runtime.connect({name:"block"}); // magic to me, opens a port 
 function checkBlocking(domain){
   var blockedSites = localStorage.getItem("blockedSites");
   var blockedList = blockedSites.split(',');
+  console.log(blockedList);
   if (blockedList.indexOf(domain) > -1){
+    console.log("hi");
     chrome.extension.sendRequest({end: bikenchill});
   }
 }
@@ -24,6 +26,7 @@ function getData(callback){ //hits webapp gets all json that is there
 getData(function(response){ // response is json object
   var blockedSites = response.users.blockedDomains;
   localStorage.setItem("blockedSites" , blockedSites);
+  // getURL();
 });
 
 function checkURL(url){
@@ -38,9 +41,16 @@ function getURL(){
   port.onMessage.addListener(function(message,sender){
     url = message.url;
     localStorage.setItem("url", url);
+
+    // if (message.url){
+    //   // checkURL(url);
+    // }
+    checkURL(url);
   });
-  var url = localStorage.getItem("url");
-  checkURL(url);
+  // var url = localStorage.getItem("url");
+  // console.log("\n url:");
+  // console.log(url);
+  // checkURL(url);
 }
 
 getURL();
