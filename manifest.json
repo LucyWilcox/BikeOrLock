@@ -5,8 +5,7 @@
   "description": "Bike BIKE Bike",
   "version": "1.0",
   "browser_action": {
-    "default_icon": "rsz_bike.png",
-    "default_popup": "popup.html"
+    "default_icon": "rsz_bike.png"
   },
   "background": { 
    "page":"bg.html",
