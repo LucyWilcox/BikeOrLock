@@ -3,8 +3,11 @@ var bikenchill = "http://bikechill.herokuapp.com/dashboard";
 function checkBlocking(domain){
   var blockedSites = localStorage.getItem("blockedSites");
   var blockedList = blockedSites.split(',');
-  if (blockedList.indexOf(domain) > -1){
-    chrome.extension.sendRequest({redirectsite: bikenchill});
+  var distanceRemaining = localStorage.getItem("distanceRemaining");
+  if (distanceRemaining > 0){
+    if (blockedList.indexOf(domain) > -1){
+      chrome.extension.sendRequest({redirectsite: bikenchill});
+    }
   }
 }
 
@@ -22,7 +25,9 @@ function getData(callback){ //hits webapp gets all json that is there
 
 getData(function(response){ // response is json object
   var blockedSites = response.users.blockedDomains;
+  var distanceRemaining = response.distToGo;
   localStorage.setItem("blockedSites" , blockedSites);
+  localStorage.setItem("distanceRemaining", distanceRemaining);
 });
 
 function checkURL(url){
