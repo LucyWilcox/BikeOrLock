@@ -34,7 +34,6 @@ function checkURL(url){
   var webPattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(/*)');
   var site = webPattern.match(url);
   var domain = site.domain;
-  console.log(domain);
   checkBlocking(domain);
 }
 
